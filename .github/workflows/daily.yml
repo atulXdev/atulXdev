@@ -2,8 +2,11 @@ name: Daily Update
 
 on:
   schedule:
-    - cron: "0 5 * * *"  # daily run (UTC)
+    - cron: "0 5 * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update:
@@ -22,7 +25,7 @@ jobs:
       - name: Commit & Push
         run: |
           git config --global user.name "atulXdev"
-          git config --global user.email "atul.kumar.singh.cg@gmail.com"
+          git config --global user.email "your-email"
           git add .
-          git commit -m "chore: daily update"
+          git commit -m "chore: daily update" || echo "No changes"
           git push
