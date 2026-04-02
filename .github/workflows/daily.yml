@@ -1,8 +1,8 @@
-name: Daily Update
+name: Daily Dev Log
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "0 5 * * *"   # daily (UTC)
   workflow_dispatch:
 
 permissions:
@@ -13,19 +13,79 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Update log
+      - name: Update log dynamically (pro version)
         run: |
+          quotes=(
+            "Code is like humor. When you have to explain it, it’s bad 😅"
+            "Programs must be written for humans to read 👨‍💻"
+            "Simplicity is the soul of efficiency ⚡"
+            "Fix the cause, not the symptom 🧠"
+            "Make it work, make it right, make it fast 🚀"
+          )
+
+          learnings=(
+            "Optimized Binary Search edge cases"
+            "Improved React state handling"
+            "Learned async/await deeply"
+            "Explored REST API structuring"
+            "Practiced recursion patterns"
+          )
+
+          debug=(
+            "Spent 2 hrs debugging a missing semicolon 😭"
+            "Edge case broke the entire logic 💀"
+            "Off-by-one error again 😤"
+            "Console.log is still the best debugger 😂"
+            "Finally fixed a bug without StackOverflow 😎"
+          )
+
+          tips=(
+            "Break problems into smaller chunks 🧩"
+            "Write code for readability, not cleverness ✨"
+            "Consistency > motivation 💪"
+            "Test edge cases early ⚠️"
+            "Name variables properly 🏷️"
+          )
+
+          facts=(
+            "Git was created by Linus Torvalds 🔥"
+            "First computer bug was an actual insect 🐞"
+            "StackOverflow has 100M+ devs helping each other 🌍"
+            "JavaScript was created in just 10 days 😳"
+            "Linux runs most of the internet servers 🌐"
+          )
+
+          focus=(
+            "No distractions, only execution 🎯"
+            "Deep work mode ON 🧠"
+            "One bug at a time 🔍"
+            "Shipping > perfection 🚀"
+            "Stay consistent, results will follow 📈"
+          )
+
+          q=${quotes[$RANDOM % ${#quotes[@]}]}
+          l=${learnings[$RANDOM % ${#learnings[@]}]}
+          d=${debug[$RANDOM % ${#debug[@]}]}
+          t=${tips[$RANDOM % ${#tips[@]}]}
+          f=${facts[$RANDOM % ${#facts[@]}]}
+          fo=${focus[$RANDOM % ${#focus[@]}]}
+
           echo "## 📅 $(date)" >> log.md
-          echo "- Learning something new 🚀" >> log.md
+          echo "- 💬 Quote: $q" >> log.md
+          echo "- 🧠 Learning: $l" >> log.md
+          echo "- 🐞 Debug: $d" >> log.md
+          echo "- ⚡ Tip: $t" >> log.md
+          echo "- 🚀 Fact: $f" >> log.md
+          echo "- 🎯 Focus: $fo" >> log.md
           echo "" >> log.md
 
       - name: Commit & Push
         run: |
           git config --global user.name "atulXdev"
-          git config --global user.email "your-email"
+          git config --global user.email "atul.kumar.singh.cg@gmail.com"
           git add .
-          git commit -m "chore: daily update" || echo "No changes"
+          git commit -m "chore: daily dev log update" || echo "No changes"
           git push
